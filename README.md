@@ -1,16 +1,18 @@
 # Algorithm Lab
 
-경로 탐색, DP, Greedy, 비트 연산을 이벤트 단위로 실행하는 학습용 Pygame 앱입니다.
-알고리즘은 pygame을 import하지 않는 generator이며, 화면은 이벤트를 받아 그립니다.
-앞뒤 이동은 같은 입력의 기록을 재생하고 복원합니다.
+A Pygame learning app that runs pathfinding, dynamic programming, greedy and bit-manipulation
+algorithms one event at a time. Each algorithm is a generator that never imports pygame; the window
+only receives its events and draws them. Stepping backward and forward replays and restores the
+recorded history of the same input.
 
-![첫 화면](docs/screenshots/01-first-screen.png)
+![First screen](docs/screenshots/01-first-screen.png)
 
-## 설치와 실행
+## Install and run
 
-프로젝트 폴더에서 실행합니다. 독자용 설치 대상은 **CPython 3.12 + pygame 2.6.1 공식 wheel**입니다.
-이 조합의 깨끗한 설치·앱 실행은 네트워크 제한으로 아직 검증하지 못했으므로 정식 지원 범위를 확정하지 않았습니다.
-Python 3.10 이상 모두 지원한다는 안내는 철회했습니다. Python 3.14 소스 빌드는 독자용 설치 대상으로 안내하지 않습니다.
+Run everything from the project folder. The intended setup for readers is
+**CPython 3.12 + the official pygame 2.6.1 wheel**. A clean install of that combination could not be
+verified yet because of network restrictions, so the supported range is not final.
+Building pygame from source on Python 3.14 is not a recommended install path.
 
 ```sh
 python3.12 -m venv .venv
@@ -18,169 +20,187 @@ python3.12 -m venv .venv
 ./run.sh
 ```
 
-### 테마
+### Theme
 
-기본 테마는 네온 색과 입체 버튼을 쓰는 `arcade`입니다. 이전 화면이 편하면 `classic`으로 실행합니다.
-`classic`은 테마 도입 전 화면과 픽셀 단위로 같습니다(실습 20개 × 기본·도움말·About 60장 비교).
+The default theme is `arcade`, with neon colors and raised buttons. If you prefer the earlier look,
+run the `classic` theme. `classic` is pixel-identical to the screens before themes were added
+(checked on 60 captures: 20 lessons × main view, help and About).
 
 ```sh
 ./run.sh --theme classic
-ALGOVIZ_THEME=classic ./run.sh     # 환경변수로 지정해도 됩니다
+ALGOVIZ_THEME=classic ./run.sh     # an environment variable works too
 ```
 
-기존 가상환경이 있으면 보존하고 새 프로젝트 복사본에서 설치하세요. 프로젝트를 옮길 때 `.venv`는 복사하지 않습니다.
-[공식 배포 목록](https://pypi.org/project/pygame/2.6.1/#files)에 CPython 3.12 macOS ARM64 wheel이 있습니다.
-pygame-ce로 변경하지 않았으며 numpy, 외부 API, 인증 정보도 사용하지 않습니다.
+If you already have a virtual environment, keep it and install into a fresh copy of the project.
+Do not copy `.venv` when you move the project.
+The [official release files](https://pypi.org/project/pygame/2.6.1/#files) include a CPython 3.12
+macOS ARM64 wheel. The app uses pygame (not pygame-ce) and needs no numpy, external API or credentials.
 
-### 개발 환경 메모
+### Development notes
 
-UI·headless smoke·verify는 Python 3.14.2 / pygame 2.6.1 / SDL 2.32.10의 **수정된 로컬 pygame**에서 수행했습니다.
-이전 작업에서 로컬 pygame을 `.venv`에 복사하고 freetype 기반 `font.py`의 순환 import를 그 복사본 안에서 수정했습니다.
-이번 사용성 작업에서 추가 서드파티 수정은 하지 않았습니다. 이 패치를 독자의 설치 방법으로 권하지 않습니다.
-별도 Python 3.12.13의 `.venv-wheel`에는 이전 작업에서 PyPI DNS 연결 실패로 pygame wheel을 설치하지 못했습니다.
-pygame 미의존 알고리즘 테스트는 이 환경에서 실행할 수 있지만 UI 검증을 대신하지 않습니다.
-전역 환경과 참고 프로젝트는 수정하지 않았습니다.
+The UI tests, headless smoke test and `verify.sh` ran on Python 3.14.2 / pygame 2.6.1 / SDL 2.32.10
+with a **locally patched pygame**: a local pygame build was copied into `.venv`, and a circular import
+in its freetype-based `font.py` was fixed inside that copy. This patch is not a recommended install
+method for readers. A separate Python 3.12.13 environment could not install the pygame wheel because
+PyPI was unreachable (DNS). The pygame-free algorithm tests run there, but that does not replace UI
+verification. Neither the global Python environment nor other projects were modified.
 
-## 첫 실습
+## First lesson
 
-첫 화면에는 **Path: BFS vs DFS**의 고정 지도가 준비됩니다.
-상단 `BFS`를 눌러 실행하고, 완료 후 `DFS`를 눌러 비교하세요. 기다리지 않으려면 `End >|` 또는 End 키를 사용합니다.
-오른쪽 비교표에 알고리즘별 **cost / edges / expanded**가 쌓입니다. BFS는 13간선, DFS는 북쪽으로 깊게 탐색해 25간선입니다.
-경로 실습에는 번호 단계 버튼이 없고, 알고리즘 버튼만 바꾸면 됩니다. 다른 모듈의 단계 버튼은 유지합니다.
-설명은 제목 옆 `i`(About)와 공통 `?` 안에 접어 두었습니다.
+The first screen loads the fixed map of **Path: BFS vs DFS**.
+Press `BFS` at the top, then press `DFS` when it finishes and compare. Use `End >|` or the End key
+to skip waiting. The comparison table on the right collects **cost / edges / expanded** for each
+algorithm: BFS takes 13 edges, while DFS dives north and takes 25 edges.
+Path lessons have no numbered step buttons; just switch the algorithm button.
+Lessons in the other modules keep their step buttons.
+Explanations are tucked away behind `i` (About, next to the title) and the shared `?` help.
 
-실습 선택 메뉴는 Path / DP / Greedy / Bits 그룹으로 나뉩니다. Bits의 아래 항목은 메뉴 안에서 휠로 이동합니다.
-실습을 불러오면 현재 입력이 교체된다는 상태 메시지가 나옵니다. 같은 실습은 같은 좌표 지도·입력으로 재현됩니다.
+The lesson menu is grouped into Path / DP / Greedy / Bits. Scroll the mouse wheel inside the menu to
+reach the lower Bits lessons. Loading a lesson shows a status message that the current input was
+replaced. The same lesson always reproduces the same map and input.
 
-## 조작
+## Controls
 
-| 조작 | 동작 |
+| Control | Action |
 |---|---|
-| Space / Play / Pause | 재생·일시정지; 완료 후 Play는 같은 기록 재생 |
-| → / Step >, ← / < Back | 이벤트 한 개 전진·복원 |
-| End / End >\| | 끝까지 계산; 뒤로 이동 기록 보존 |
-| R / Start | 같은 기록 처음으로 이동 |
-| Slow / Normal / Fast | 해당 실습 기본 속도의 0.5배 / 1배 / 2배 |
-| ↑ / +, ↓ / − | 초당 이벤트 수를 1씩 미세 조정; 범위 1..240 |
-| Reset lesson | 기본 입력·기본 속도로 복원하고 비교표 초기화 |
-| Tab / Enter | 버튼·필드 초점 이동 / 실행 |
-| 필드 클릭, Enter 또는 Apply | 편집 적용; 오류이면 이전 입력·기록 보존 |
-| 오른쪽 패널 휠 | 긴 자료구조·표 데이터 목록 보기 |
-| i / ? | 실습 배경 설명 / 공통 도움말 |
-| Esc / 팝업 바깥 클릭 | 팝업 닫기; 그 클릭은 배경 조작으로 전달되지 않음 |
+| Space / Play / Pause | Play or pause; after the end, Play replays the same history |
+| → / Step >, ← / < Back | Move one event forward / restore one event |
+| End / End >\| | Compute to the end; the history for stepping back is kept |
+| R / Start | Jump to the start of the same history |
+| Slow / Normal / Fast | 0.5× / 1× / 2× the lesson's default speed |
+| ↑ / +, ↓ / − | Fine-tune events per second by 1; range 1..240 |
+| Reset lesson | Restore the default input and speed and clear the comparison table |
+| Tab / Enter | Move focus between buttons and fields / activate |
+| Click a field, then Enter or Apply | Apply the edit; on an error the previous input and history are kept |
+| Wheel over the right panel | Scroll long data-structure and table listings |
+| i / ? | Lesson background / shared help |
+| Esc / click outside a popup | Close the popup; that click is not passed to the controls behind it |
 
-팝업이 열린 동안 뒤쪽 키·클릭·휠·드래그를 막고 재생을 일시정지합니다.
-단계 버튼 위에 마우스를 올리면 한 줄 설명 tooltip이 나옵니다.
-필드 편집 중에는 Space와 R도 문자 입력입니다. Esc는 입력을 취소하며, 팝업·메뉴·편집이 없으면 앱을 종료합니다.
-상태 메시지는 하단 한 곳에 모으며 오류를 우선합니다.
+While a popup is open, keys, clicks, wheel and drag behind it are blocked and playback pauses.
+Hovering over a step button shows a one-line tooltip.
+While editing a field, Space and R are typed as characters. Esc cancels the edit; with no popup,
+menu or edit open, Esc quits the app.
+Status messages are collected in one bar at the bottom, and errors take priority.
 
-### 속도
+### Speed
 
-기본값: 경로 30 events/s(열린 Guided 지도는 60), DP 12, Greedy 동전10·회의3·bag6,
-Bits 기본4(논리·거듭제곱 판별2, 부호 반전·clear3, 시프트·부분집합1).
-사용자가 바꾼 속도는 해당 실습을 다시 불러오면 유지하며, Reset lesson은 기본값으로 되돌립니다.
-대표 단계의 5~15초 재생을 목표로 이벤트 수에 맞췄지만 모든 단계가 이 범위에 들지는 않습니다.
-짧은 경계 사례·DFS·역추적과 몇 번 안 되는 greedy 선택은 더 빠르게 끝납니다. 최대 입력의 DP는 더 오래 걸립니다.
-실습별 실제 자동 재생 시간은 [verification.json](docs/verification.json)의 `lesson_stage_timing`에 기록합니다.
-이는 사람의 읽기·입력·이해 시간이 아닙니다.
+Defaults: Path 30 events/s (60 on the open Guided map), DP 12, Greedy coins 10 / meetings 3 / bag 6,
+Bits 4 by default (logic and power-of-two 2, negation and clear 3, shift and subsets 1).
+A speed you change is kept when you reload that lesson; Reset lesson restores the default.
+Defaults aim for 5–15 seconds per representative step based on event counts, but not every step
+falls in that range. Short edge cases, DFS, traceback and greedy runs with few choices finish faster;
+DP on the largest inputs takes longer.
+The measured auto-play time per lesson is recorded under `lesson_stage_timing` in
+[verification.json](docs/verification.json). It does not include a person's reading, typing or thinking time.
 
-## 고정 경로 지도와 예상 결과
+## Fixed path maps and expected results
 
-| 실습 | 고정 입력 | 비교 결과 |
+| Lesson | Fixed input | Comparison |
 |---|---|---|
-| BFS vs DFS | 16×10, S=(1,5), G=(14,5), y=3의 x=3..12 벽 | BFS cost13 / edges13 / expanded102, DFS cost25 / edges25 / expanded25 |
-| Swamp costs | 16×10, x=6..9·y=4..6 늪 띠(진입 비용5) | BFS cost29 / edges13 / expanded111, Dijkstra cost17 / edges17 / expanded150 |
-| Guided search | 열린 24×14, S=(1,7), G=(22,7) | Dijkstra cost21 / expanded267, A* cost21 / expanded22 |
-| Heuristic trap | 16×10, (7,5) 한 칸 비용5 | A* cost15 / edges15 / expanded42, A* (h×3) cost17 / edges13 / expanded14 |
+| BFS vs DFS | 16×10, S=(1,5), G=(14,5), wall at y=3 for x=3..12 | BFS cost 13 / edges 13 / expanded 102, DFS cost 25 / edges 25 / expanded 25 |
+| Swamp costs | 16×10, swamp block x=6..9, y=4..6 (entry cost 5) | BFS cost 29 / edges 13 / expanded 111, Dijkstra cost 17 / edges 17 / expanded 150 |
+| Guided search | open 24×14, S=(1,7), G=(22,7) | Dijkstra cost 21 / expanded 267, A* cost 21 / expanded 22 |
+| Heuristic trap | 16×10, one cell at (7,5) with cost 5 | A* cost 15 / edges 15 / expanded 42, A* (h×3) cost 17 / edges 13 / expanded 14 |
 
-BFS·DFS는 goal을 발견한 relax 이벤트 직후 종료합니다. Dijkstra·A*는 goal을 우선순위 큐에서 꺼낼 때 종료합니다.
-시작=goal은 비용0·간선0이며, 시작·도착이 막히거나 연결되지 않으면 No path를 표시합니다.
-BFS는 간선 수를 최소화하며 늪 비용을 최소화하지 않습니다. DFS는 도달 가능성만 보장합니다.
-기본 지도에서 DFS는 goal 발견 뒤 다른 frontier를 소모하지 않고 25칸 확장으로 종료합니다.
+BFS and DFS stop right after the relax event that discovers the goal. Dijkstra and A* stop when the
+goal is popped from the priority queue.
+Start = goal gives cost 0 and 0 edges; a blocked start or goal, or a disconnected map, shows No path.
+BFS minimizes the number of edges, not the swamp cost. DFS only guarantees reachability.
+On the default map, DFS stops after expanding 25 cells, right when it discovers the goal, without
+draining the rest of the frontier.
 
-`Wall / Swamp / Erase / Start / Goal`로 지도에 그리며 오른쪽 클릭은 지우기입니다.
-`Clear`는 벽·늪을 지우고, `Seed`와 `Random maze`는 동일 seed의 랜덤 지도를 재현합니다.
-지도 편집은 비교표·기록을 초기화합니다. 랜덤 미로는 연결을 보장하지 않습니다.
-가중치는 양의 정수, 비용은 칸 진입 시 지불하며 시작 칸 자체는 비용0입니다.
-작은 칸과 A*의 g/h/f는 hover 패널에서 확인합니다.
+Draw on the map with `Wall / Swamp / Erase / Start / Goal`; right-click erases.
+`Clear` removes walls and swamps, and `Seed` with `Random maze` reproduces the random map for that seed.
+Editing the map resets the comparison table and the history. Random mazes are not guaranteed to be connected.
+Weights are positive integers, a cell's cost is paid on entry, and the start cell itself costs 0.
+For small cells, and for A*'s g/h/f values, hover over a cell and read the side panel.
 
-### 순서와 동점 규칙
+### Order and tie-breaking rules
 
-- 이웃은 Up → Right → Down → Left. BFS는 FIFO 큐입니다.
-- DFS는 이웃을 역순으로 push해 Up부터 pop하며 **발견 시 중복 삽입을 막습니다**.
-  대기 중인 형제를 먼저 발견하므로 교과서 재귀 DFS와 방문 순서·부모 트리가 다를 수 있습니다.
-- Dijkstra와 A*는 key가 같으면 먼저 삽입한 항목을 우선합니다. stale 항목도 실제 PQ에 남아 있는 동안 표시합니다.
-- A*의 h는 Manhattan 거리이며 h×1은 이 양의 가중치 격자에서 admissible/consistent합니다.
-  h×3은 최적성을 보장하지 않으며, 더 나은 g가 발견되면 노드를 다시 엽니다.
-- LCS는 동점이면 위로, 배낭 DP는 동점이면 현재 물건을 건너뜁니다.
-- 동전 DP는 동점이면 큰 동전부터, 회의·물건 ratio 정렬은 동점이면 원래 입력 순서입니다.
-- 부분집합은 mask 오름차순, 가치 동점은 먼저 나온 mask를 유지합니다.
+- Neighbors are visited Up → Right → Down → Left. BFS uses a FIFO queue.
+- DFS pushes neighbors in reverse so Up is popped first, and **prevents duplicate pushes at discovery**.
+  Because pending siblings are marked as discovered early, its visit order and parent tree can differ
+  from textbook recursive DFS.
+- Dijkstra and A* prefer the entry inserted first when keys tie. Stale entries are shown while they
+  are still physically in the priority queue.
+- A* uses the Manhattan distance as h; h×1 is admissible and consistent on this positive-weight grid.
+  h×3 does not guarantee optimality and reopens a node when a better g is found.
+- LCS breaks ties by moving up; the knapsack DP breaks ties by skipping the current item.
+- Coin DP breaks ties toward the larger coin; meeting and item-ratio sorting keep the original input order on ties.
+- Subsets are listed in ascending mask order; on equal value the earlier mask is kept.
 
-## DP·Greedy 실습
+## DP and greedy lessons
 
-| 실습 | 단계 | 관찰 |
+| Lesson | Steps | What to observe |
 |---|---|---|
-| Fibonacci calls | Run naive → Run memo → Compare n=8 | n6 값8, 호출25 대11; n8 값21, 호출67 대15 |
-| LCS traceback | Fill table → Trace back → Swap strings | 표 완성 후 일시정지, 참조 칸·역추적, 두 문자열의 공통 부분수열 |
-| 0/1 knapsack | Fill table → Trace back → Compare greedy | 물건(2,12),(4,20),(6,24), 용량10: 2+3의 가치44; 같은 입력 공유 |
-| Coin counterexample | Run greedy → Run optimal → Canonical coins | {1,3,4},6: greedy 4+1+1(3개), 최적 3+3(2개) |
-| Canonical coins | Run greedy → Run optimal → Counterexample | {1,5,10,25},63은 둘 다6개 |
-| Earliest start trap | Run start → Run finish → Try duration trap | 가장 먼저 시작하는 긴 회의1개 vs 가장 먼저 끝나는 회의3개 |
-| Shortest meeting trap | Run duration → Run finish → Try start trap | 가운데 짧은 회의1개 vs 호환 가능한 회의2개 |
-| Fractional vs 0/1 | Run ratios → Run optimal → Open DP table | 동일 입력: fractional48, 0/1 greedy32, DP44 |
+| Fibonacci calls | Run naive → Run memo → Compare n=8 | n=6: value 8, 25 vs 11 calls; n=8: value 21, 67 vs 15 calls |
+| LCS traceback | Fill table → Trace back → Swap strings | Pause after the table is filled, dependency cells and traceback, the common subsequence of both strings |
+| 0/1 knapsack | Fill table → Trace back → Compare greedy | Items (2,12), (4,20), (6,24), capacity 10: items 2+3 for value 44; the same input is shared |
+| Coin counterexample | Run greedy → Run optimal → Canonical coins | {1,3,4}, amount 6: greedy 4+1+1 (3 coins), optimal 3+3 (2 coins) |
+| Canonical coins | Run greedy → Run optimal → Counterexample | {1,5,10,25}, amount 63: both use 6 coins |
+| Earliest start trap | Run start → Run finish → Try duration trap | One long meeting that starts first vs three meetings chosen by earliest finish |
+| Shortest meeting trap | Run duration → Run finish → Try start trap | One short meeting in the middle vs two compatible meetings |
+| Fractional vs 0/1 | Run ratios → Run optimal → Open DP table | Same input: fractional 48, 0/1 greedy 32, DP 44 |
 
-표는 가로·세로 자동 맞춤이며 **Columns / Amounts 버튼과 표 휠 이동은 없습니다**.
-글꼴은 일반19px·보조16px로 고정합니다. LCS는 각12자, 배낭은 최대8물건·표시 용량25입니다.
-표 최소 칸은 가로28px·세로22px이며, 배낭 값이 길면 필요한 칸 너비가 증가해 허용 용량이 더 줄어듭니다.
-표에 들어가지 않는 입력은 오류로 거절하며 이전 입력을 보존합니다. 알고리즘 자체 용량 제한30과 UI 표시 제한은 다릅니다.
-동전은 금액0..150, 한 줄10칸으로 감싸며 `금액: 최소 동전 수`를 표시합니다. 현재 칸과 참조 칸은 항상 전체 표 안에 있습니다.
-피보나치는 모든 호출 노드를 읽을 수 있도록 n<=8로 제한합니다.
+Tables fit the panel automatically in both directions; **there are no Columns / Amounts buttons and
+no wheel scrolling inside tables**. Font sizes stay fixed at 19 px (regular) and 16 px (small).
+LCS accepts up to 12 characters per string; the knapsack accepts up to 8 items and a displayed capacity of 25.
+The minimum table cell is 28 px wide and 22 px tall; long knapsack values widen the cells and so
+lower the capacity that fits. Inputs that do not fit are rejected with an error, keeping the previous
+input. The algorithm's own capacity limit (30) is separate from this display limit.
+Coins accept amounts 0..150, wrapped at 10 cells per row and shown as `amount: fewest coins`.
+The current cell and its dependency cells always stay inside the table.
+Fibonacci is limited to n <= 8 so every call node stays readable.
 
-## 비트 실습
+## Bit lessons
 
-W=4/8/16, 각 칸은 비트 값·자리값, 행은 10진수·16진수입니다.
-모든 단어·결과는 `& ((1 << W) - 1)`로 자릅니다. signed는 같은 단어의 2의 보수 해석입니다.
-Python의 `~5 == -6` 및 음수 `>>`는 폭 제한 없는 정수 동작입니다. W비트 결과와 raw Python 결과를 구분합니다.
-논리 우측 시프트는 0, 산술 우측 시프트는 부호를 채웁니다. 패널 값도 현재 signed/unsigned 보기를 따릅니다.
+W is 4, 8 or 16. Each cell shows a bit and its place value; each row shows decimal and hexadecimal.
+Every word and result is masked with `& ((1 << W) - 1)`. Signed is the two's complement reading of the same word.
+Python's `~5 == -6` and `>>` on negative numbers follow unbounded integers; the app keeps W-bit
+results and raw Python results apart.
+Logical right shift fills with 0, arithmetic right shift fills with the sign bit. Panel values follow
+the current signed/unsigned view.
 
-| 실습 | 단계 | 관찰 |
+| Lesson | Steps | What to observe |
 |---|---|---|
-| Logic gates | AND → XOR → NOT | 152,60: AND24 / XOR164 / NOT103; OR188은 연산 버튼 |
-| Shift and sign | Logical right → Arithmetic right → Shift left | 152를2칸: 38 / 단어230(signed−26) / 96 |
-| Two's complement | Negate x → Try zero → Minimum value | 5→251(signed−5), 0→0, −128→같은 단어128 |
-| Clear and count | Clear once → Count all ones → Try zero | 152→144; 반복152→144→128→0, popcount3; zero popcount0 |
-| Isolate lowest one | Isolate x → Try zero → Try odd x | 152→8, zero→0, odd37→1 |
-| Power of two | Test x → Try zero → Try power | 기본12는 False, zero guard로0도 False,16은 True |
-| XOR singleton | Find singleton → Reorder words → Change example | 짝은 취소되고7; 순서를 뒤집어도7, 새 예제는11 |
-| Subsets and knapsack | List subsets → Use bag input → Open knapsack DP | 8부분집합의 최적44, 같은 물건·용량을 DP로 비교 |
+| Logic gates | AND → XOR → NOT | 152 and 60: AND 24 / XOR 164 / NOT 103; OR 188 via the operation button |
+| Shift and sign | Logical right → Arithmetic right → Shift left | 152 shifted by 2: 38 / word 230 (signed −26) / 96 |
+| Two's complement | Negate x → Try zero → Minimum value | 5 → 251 (signed −5), 0 → 0, −128 → the same word 128 |
+| Clear and count | Clear once → Count all ones → Try zero | 152 → 144; repeated 152 → 144 → 128 → 0, popcount 3; zero has popcount 0 |
+| Isolate lowest one | Isolate x → Try zero → Try odd x | 152 → 8, zero → 0, odd 37 → 1 |
+| Power of two | Test x → Try zero → Try power | Default 12 is False, 0 is False thanks to the zero guard, 16 is True |
+| XOR singleton | Find singleton → Reorder words → Change example | Pairs cancel, leaving 7; reversing the order still gives 7; the new example gives 11 |
+| Subsets and knapsack | List subsets → Use bag input → Open knapsack DP | Best value 44 over 8 subsets; compare the same items and capacity in the DP |
 
-`Use bag input`은 이전 DP/Greedy의 사용자 입력을 가져옵니다. 기본 입력을 바꾸지 않았다면 같은 입력이 다시 나오는 버튼입니다.
-`Reorder words`는 정답을 바꾸는 버튼이 아니라 누적 순서가 바뀌어도 답이 같음을 보여주는 실습입니다.
-Power 실습은 Test x와 Try power의 기본 입력이 같던 중복을 제거했습니다(12 대16).
-XOR는 마스킹 후 정확히 하나가1회, 나머지는2회 나와야 합니다. 부분집합은 최대8물건이며 n<=W입니다.
+`Use bag input` loads the user input from the earlier DP/greedy lessons; if you never changed the
+default input, it brings back the same input. `Reorder words` does not change the answer; it shows
+that the result stays the same when the accumulation order changes.
+The power-of-two lesson uses different defaults for Test x and Try power (12 vs 16) so the two steps differ.
+For XOR, exactly one word must appear once after masking and every other word twice.
+Subsets support up to 8 items, with n <= W.
 
-## 파일 구조
+## Project layout
 
 ```text
 algoviz/
-  engine.py       이벤트·Timeline·undo
-  pathfinding.py  경로 generator·결정적 frontier
-  dp.py           Fibonacci·LCS·0/1 배낭 generator
-  greedy.py       동전·회의·분할/0/1 비교 generator
-  bits.py         W비트 generator
-  app.py          UI·입력·재생·자동 맞춤·팝업
-  bits_view.py    비트 UI
-  lessons.py      20실습·속도·고정 지도
-  education.py    About·tooltip·도움말 설명
-  theme.py        arcade / classic 색 테마
-  capture.py      PNG 저장
- tests/fixtures/pathfinding.py.txt  이전 weighted-search snapshot 참조
- tools/verify.py                   캡처·실습 재생시간·프레임 측정
- tools/benchmark_end.py            80×60 End 벤치마크
- docs/                            검증 기록·스크린샷
+  engine.py       events, Timeline, undo
+  pathfinding.py  path-search generators, deterministic frontier
+  dp.py           Fibonacci, LCS, 0/1 knapsack generators
+  greedy.py       coins, meetings, fractional vs 0/1 generators
+  bits.py         W-bit generators
+  app.py          UI, input, playback, auto-fit, popups
+  bits_view.py    bit-lesson UI
+  lessons.py      20 lessons, speeds, fixed maps
+  education.py    About, tooltip and help text
+  theme.py        arcade / classic color themes
+  capture.py      PNG saving
+ tests/fixtures/pathfinding.py.txt  earlier weighted-search snapshot used as a reference
+ tools/verify.py                   captures, lesson play time and frame measurements
+ tools/benchmark_end.py            80×60 End benchmark
+ docs/                             verification records and screenshots
 ```
 
-## 검증
+## Verification
 
 ```sh
 ./verify.sh
@@ -189,41 +209,47 @@ mkdir -p exports
 ./run.sh --headless --lesson 7 --finish --frames 3 --screenshot exports/coin.png
 ```
 
-최신 전체 테스트는 **52개**입니다. 결과는 [usability-verify-output.txt](docs/usability-verify-output.txt)에 있습니다.
+The full suite has **55 tests**, run by `./verify.sh`. An earlier run log is in
+[usability-verify-output.txt](docs/usability-verify-output.txt).
 
-| 대상 | 독립 기준·회귀 검사 |
+| Area | Independent reference / regression check |
 |---|---|
-| 경로 | seed9031, 400개 무작위 작은 격자. Bellman-Ford와 Dijkstra/A* 비용 비교; 무가중 BFS 비용·DFS 도달성 비교 |
-| 경로 종료·실습 | BFS/DFS goal relax 직후 done, weighted goal pop 뒤 done; 시작=goal·막힌goal 포함; 네 지도 주장 고정 |
-| LCS·배낭 | 각각250개 작은 입력을 전체 부분수열·부분집합 열거와 비교 |
-| Fibonacci | naive 호출 수 2F(n+1)−1, memo는 n>=2에서2n−1 |
-| Greedy | 동전·회의·bag를 독립 전체 탐색과 비교, 실패 예제 고정 |
-| Bits | AND/OR/XOR 각각65,536쌍을 자리 목록 계산과 비교; 모든8비트 시프트0..8·negation·tricks,4/16비트 경계 |
-| 기록 | 알고리즘마다 모든 상태를 역행·재전진해 동일한지 검사; weighted frontier는 이전 snapshot fixture와 비교 |
-| UI | 실제 Pygame 이벤트 주입. 20실습(경로 알고리즘 버튼, 나머지48단계), resize·Tab/Enter·입력 오류·popup·tooltip·속도 기억 |
-| 표 | 각12자 LCS,8물건/용량25,금액150을 매 이벤트 그려 두 해상도의 모든 칸·참조·현재칸 사각형 포함 검사 |
+| Paths | 400 small random grids (seed 9031): Dijkstra/A* cost vs Bellman-Ford; unweighted BFS cost and DFS reachability |
+| Path stopping and lessons | BFS/DFS done right after the goal relax, weighted search done after the goal pop; start = goal and blocked goal included; the claims of all four maps are pinned |
+| LCS and knapsack | 250 small inputs each, compared with full subsequence and subset enumeration |
+| Fibonacci | Naive call count 2F(n+1)−1; memoized 2n−1 for n >= 2 |
+| Greedy | Coins, meetings and bag compared with independent exhaustive search; failure examples pinned |
+| Bits | AND/OR/XOR on all 65,536 pairs each vs digit-list arithmetic; every 8-bit shift 0..8, negation and trick; 4- and 16-bit edge cases |
+| History | For every algorithm, all states are stepped back and forward again and compared; the weighted frontier is compared with the earlier snapshot fixture |
+| UI | Real injected Pygame events across 20 lessons (path algorithm buttons, 48 steps elsewhere): resize, Tab/Enter, input errors, popups, tooltips, remembered speed |
+| Tables | LCS with 12 characters each, 8 items / capacity 25, amount 150, drawn at every event: every cell, dependency and current-cell rectangle stays inside at both resolutions |
 
-About의 수치·성질은 위 독립 참조 테스트와 대조했습니다. 일반 알고리즘 복잡도는 기록·렌더 비용을 제외합니다.
-h×3의 재개방 탐색에 safe A*의 복잡도 보장을 적용하지 않습니다.
-비트 Python 설명은 [공식 정수 비트 연산 문서](https://docs.python.org/3/library/stdtypes.html#bitwise-operations-on-integer-types)와 대조했습니다.
+The numbers and properties in the About popups were checked against the independent reference tests above.
+The general complexity figures exclude recording and rendering costs, and the guarantees of safe A*
+are not claimed for the reopening h×3 search. The Python bit explanations were checked against the
+[official documentation on bitwise operations on integers](https://docs.python.org/3/library/stdtypes.html#bitwise-operations-on-integer-types).
 
-[화면 검증 기록](docs/SCREEN_REVIEW.md), [측정 원본](docs/verification.json), [PNG manifest](docs/capture-manifest.json)을 함께 관리합니다.
-1280×720 / 1366×768은 headless 캡처와 입력 이벤트로 검증하며 실제 데스크톱 사람 조작으로 보고하지 않습니다.
-3분 사용성 목표는 End·알고리즘 비교표로 실습 동선을 줄였지만 실제 초보 사용자 테스트가 남아 있습니다.
+[Screen review](docs/SCREEN_REVIEW.md), [raw measurements](docs/verification.json) and the
+[PNG manifest](docs/capture-manifest.json) are kept together.
+The 1280×720 and 1366×768 layouts are verified with headless captures and injected input events,
+not reported as hands-on desktop use. The End button and the algorithm comparison table shorten the
+lesson flow toward the three-minute usability goal, but testing with real beginners is still pending.
 
-### 성능 기록
+### Performance
 
-frontier는 매 이벤트 전체 복사·정렬 대신 추가·삭제된 항목만 기록하며 실제 pop 순서는 화면에서 만듭니다.
-80×60 Dijkstra의 최초 전후 측정은 일반 실행1.3706초→0.0786초,
-tracemalloc 최대 Python 할당56,186,592→10,691,616바이트입니다.
-[이전](docs/end-before.json), [최초 개선](docs/end-after-initial.json), [최신 재측정](docs/end-after.json)을 보존합니다.
-verification.json의 `end_80x60`은 before / initial_after / after를 구분합니다.
-300프레임 tick+draw+dummy display.flip 측정은 대기 시간을 제외하며 실제 GPU·전체 구간60fps 보장이 아닙니다.
+Instead of copying and sorting the whole frontier at every event, the history records only added and
+removed entries; the actual pop order is built when drawing. For 80×60 Dijkstra, the first
+before/after measurement went from 1.3706 s to 0.0786 s, and the tracemalloc peak Python allocation
+from 56,186,592 to 10,691,616 bytes.
+The [before](docs/end-before.json), [first improvement](docs/end-after-initial.json) and
+[latest re-measurement](docs/end-after.json) are kept; `end_80x60` in verification.json separates
+before / initial_after / after. The 300-frame tick + draw + dummy display.flip measurement excludes
+waiting time and does not guarantee real GPU performance or 60 fps across the whole run.
 
-### 남은 제한
+### Known limitations
 
-- 깨끗한 공식 pygame 설치, 실제 macOS/HiDPI/트랙패드·다른 OS와 초보 독자3분 사용성은 미확인입니다.
-- 기록은 이벤트 수에 따라 메모리를 사용합니다. 알고리즘 복잡도에는 기록·표시 비용이 포함되지 않습니다.
-- 최대 입력의 재생은 작은 기본 실습보다 깁니다. End로 결과를 보거나 속도를 조절하세요.
-- 긴 오른쪽 패널은 스크롤하며 긴 필드 미리보기는 생략됩니다. 비트 Result는 10진수/16진수 줄로 나눠 표시합니다.
-- `.gitignore`에 `.DS_Store`를 추가했습니다. 기존 `docs/.DS_Store`는 삭제 확인을 받지 않아 보존했습니다.
+- A clean install of the official pygame, real macOS / HiDPI / trackpad use, other operating systems and
+  the three-minute usability goal for beginners are not verified yet.
+- The history uses memory in proportion to the number of events; algorithm complexity figures do not include recording or drawing.
+- Playing the largest inputs takes longer than the small default lessons. Use End to see the result, or change the speed.
+- Long right-panel listings scroll, and long field previews are shortened. Bit results are split into decimal and hexadecimal lines.
