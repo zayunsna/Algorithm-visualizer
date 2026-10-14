@@ -14,17 +14,17 @@
   ],
   "algorithm": "Dijkstra",
   "normal": {
-    "elapsed_seconds": 0.084,
+    "elapsed_seconds": 0.0818,
     "tracemalloc_peak_bytes": null,
-    "process_peak_rss_bytes": 33259520,
+    "process_peak_rss_bytes": 33177600,
     "events": 7803,
     "expanded": 3871,
     "cost": 79
   },
   "traced": {
-    "elapsed_seconds": 0.492,
+    "elapsed_seconds": 0.4684,
     "tracemalloc_peak_bytes": 10692216,
-    "process_peak_rss_bytes": 47775744,
+    "process_peak_rss_bytes": 47644672,
     "events": 7803,
     "expanded": 3871,
     "cost": 79

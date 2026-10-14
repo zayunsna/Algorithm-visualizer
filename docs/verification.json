@@ -754,9 +754,9 @@
     }
   ],
   "first_lesson_animation_seconds": 9.76,
-  "first_lesson_end_work_seconds": 0.0126,
+  "first_lesson_end_work_seconds": 0.0151,
   "usability": {
-    "tests_total": 52,
+    "tests_total": 55,
     "maximum_lcs_chars": 12,
     "maximum_items": 8,
     "display_capacity_limit": 25,
@@ -772,9 +772,9 @@
     "events_per_second": 240,
     "events_at_end": 4001,
     "expanded_at_end": 1970,
-    "mean_ms": 8.19,
-    "p95_ms": 8.442,
-    "max_ms": 9.124,
+    "mean_ms": 9.163,
+    "p95_ms": 9.578,
+    "max_ms": 10.117,
     "driver": "dummy",
     "includes": "tick + draw + display.flip; excludes sleep"
   },
@@ -861,17 +861,17 @@
       ],
       "algorithm": "Dijkstra",
       "normal": {
-        "elapsed_seconds": 0.084,
+        "elapsed_seconds": 0.0818,
         "tracemalloc_peak_bytes": null,
-        "process_peak_rss_bytes": 33259520,
+        "process_peak_rss_bytes": 33177600,
         "events": 7803,
         "expanded": 3871,
         "cost": 79
       },
       "traced": {
-        "elapsed_seconds": 0.492,
+        "elapsed_seconds": 0.4684,
         "tracemalloc_peak_bytes": 10692216,
-        "process_peak_rss_bytes": 47775744,
+        "process_peak_rss_bytes": 47644672,
         "events": 7803,
         "expanded": 3871,
         "cost": 79
