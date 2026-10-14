@@ -1,0 +1,3 @@
+# Official-wheel target: CPython 3.12; clean-install verification pending.
+# Python 3.14 source builds are outside the supported installation recipe.
+pygame==2.6.1

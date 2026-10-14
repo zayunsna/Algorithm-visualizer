@@ -1,0 +1,888 @@
+{
+  "environment": {
+    "python": "3.14.2",
+    "pygame": "2.6.1",
+    "SDL": [
+      2,
+      32,
+      10
+    ],
+    "driver": "dummy",
+    "size": [
+      1280,
+      720
+    ]
+  },
+  "path": {
+    "02-bfs": {
+      "cost": 13,
+      "length": 13,
+      "expanded": 102,
+      "max_frontier": 12,
+      "relaxations": 110
+    },
+    "03-dfs": {
+      "cost": 25,
+      "length": 25,
+      "expanded": 25,
+      "max_frontier": 28,
+      "relaxations": 52
+    },
+    "04-bfs-swamp": {
+      "cost": 29,
+      "length": 13,
+      "expanded": 111,
+      "max_frontier": 13,
+      "relaxations": 120
+    },
+    "05-dijkstra": {
+      "cost": 17,
+      "length": 17,
+      "expanded": 150,
+      "max_frontier": 18,
+      "relaxations": 157
+    },
+    "06-astar": {
+      "cost": 21,
+      "length": 21,
+      "expanded": 22,
+      "max_frontier": 44,
+      "relaxations": 64
+    },
+    "07-astar-overestimate": {
+      "cost": 17,
+      "length": 13,
+      "expanded": 14,
+      "max_frontier": 28,
+      "relaxations": 40
+    }
+  },
+  "path_maps": {
+    "Path: BFS vs DFS": {
+      "size": [
+        16,
+        10
+      ],
+      "walls": [
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          12,
+          3
+        ]
+      ],
+      "swamps": [],
+      "columns": [
+        "cost",
+        "edges",
+        "expanded"
+      ],
+      "results": {
+        "BFS": [
+          13,
+          13,
+          102
+        ],
+        "DFS": [
+          25,
+          25,
+          25
+        ],
+        "Dijkstra": [
+          13,
+          13,
+          111
+        ],
+        "A*": [
+          13,
+          13,
+          14
+        ],
+        "A* (h\u00d73)": [
+          13,
+          13,
+          14
+        ]
+      }
+    },
+    "Path: Swamp costs": {
+      "size": [
+        16,
+        10
+      ],
+      "walls": [],
+      "swamps": [
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          9,
+          5
+        ],
+        [
+          9,
+          6
+        ]
+      ],
+      "columns": [
+        "cost",
+        "edges",
+        "expanded"
+      ],
+      "results": {
+        "BFS": [
+          29,
+          13,
+          111
+        ],
+        "DFS": [
+          25,
+          25,
+          25
+        ],
+        "Dijkstra": [
+          17,
+          17,
+          150
+        ],
+        "A*": [
+          17,
+          17,
+          62
+        ],
+        "A* (h\u00d73)": [
+          17,
+          17,
+          28
+        ]
+      }
+    },
+    "Path: Guided search": {
+      "size": [
+        24,
+        14
+      ],
+      "walls": [],
+      "swamps": [],
+      "columns": [
+        "cost",
+        "edges",
+        "expanded"
+      ],
+      "results": {
+        "BFS": [
+          21,
+          21,
+          253
+        ],
+        "DFS": [
+          37,
+          37,
+          37
+        ],
+        "Dijkstra": [
+          21,
+          21,
+          267
+        ],
+        "A*": [
+          21,
+          21,
+          22
+        ],
+        "A* (h\u00d73)": [
+          21,
+          21,
+          22
+        ]
+      }
+    },
+    "Path: Heuristic trap": {
+      "size": [
+        16,
+        10
+      ],
+      "walls": [],
+      "swamps": [
+        [
+          7,
+          5
+        ]
+      ],
+      "columns": [
+        "cost",
+        "edges",
+        "expanded"
+      ],
+      "results": {
+        "BFS": [
+          17,
+          13,
+          111
+        ],
+        "DFS": [
+          25,
+          25,
+          25
+        ],
+        "Dijkstra": [
+          15,
+          15,
+          139
+        ],
+        "A*": [
+          15,
+          15,
+          42
+        ],
+        "A* (h\u00d73)": [
+          17,
+          13,
+          14
+        ]
+      }
+    }
+  },
+  "bits": {
+    "23-bits-logic": {
+      "width": 8,
+      "result": 24,
+      "iterations": 0,
+      "is_power": null,
+      "best": null,
+      "subsets": null
+    },
+    "24-bits-shift": {
+      "width": 8,
+      "result": 38,
+      "iterations": 2,
+      "is_power": null,
+      "best": null,
+      "subsets": null
+    },
+    "25-bits-negate": {
+      "width": 8,
+      "result": 251,
+      "iterations": 0,
+      "is_power": null,
+      "best": null,
+      "subsets": null
+    },
+    "26-bits-clear": {
+      "width": 8,
+      "result": 0,
+      "iterations": 3,
+      "is_power": null,
+      "best": null,
+      "subsets": null
+    },
+    "27-bits-isolate": {
+      "width": 8,
+      "result": 8,
+      "iterations": 0,
+      "is_power": null,
+      "best": null,
+      "subsets": null
+    },
+    "28-bits-power": {
+      "width": 8,
+      "result": 8,
+      "iterations": 1,
+      "is_power": false,
+      "best": null,
+      "subsets": null
+    },
+    "29-bits-unique": {
+      "width": 8,
+      "result": 7,
+      "iterations": 5,
+      "is_power": null,
+      "best": null,
+      "subsets": null
+    },
+    "30-bits-subset": {
+      "width": 8,
+      "result": 7,
+      "iterations": 0,
+      "is_power": null,
+      "best": 44,
+      "subsets": 8
+    }
+  },
+  "lesson_stage_timing": [
+    {
+      "lesson": 0,
+      "action": "algoBFS",
+      "seconds": 7.13,
+      "events": 214,
+      "speed": 30
+    },
+    {
+      "lesson": 0,
+      "action": "algoDFS",
+      "seconds": 2.63,
+      "events": 79,
+      "speed": 30
+    },
+    {
+      "lesson": 1,
+      "action": "algoBFS",
+      "seconds": 7.77,
+      "events": 233,
+      "speed": 30
+    },
+    {
+      "lesson": 2,
+      "action": "algoBFS",
+      "seconds": 8.68,
+      "events": 521,
+      "speed": 60
+    },
+    {
+      "lesson": 3,
+      "action": "algoBFS",
+      "seconds": 7.77,
+      "events": 233,
+      "speed": 30
+    },
+    {
+      "lesson": 4,
+      "action": "step0",
+      "seconds": 4.33,
+      "events": 52,
+      "speed": 12
+    },
+    {
+      "lesson": 4,
+      "action": "step1",
+      "seconds": 6.25,
+      "events": 75,
+      "speed": 12
+    },
+    {
+      "lesson": 4,
+      "action": "step2",
+      "seconds": 13.92,
+      "events": 167,
+      "speed": 12
+    },
+    {
+      "lesson": 5,
+      "action": "step0",
+      "seconds": 7.08,
+      "events": 85,
+      "speed": 12
+    },
+    {
+      "lesson": 5,
+      "action": "step1",
+      "seconds": 0.75,
+      "events": 9,
+      "speed": 12
+    },
+    {
+      "lesson": 5,
+      "action": "step2",
+      "seconds": 7.67,
+      "events": 92,
+      "speed": 12
+    },
+    {
+      "lesson": 6,
+      "action": "step0",
+      "seconds": 5.58,
+      "events": 67,
+      "speed": 12
+    },
+    {
+      "lesson": 6,
+      "action": "step1",
+      "seconds": 0.33,
+      "events": 4,
+      "speed": 12
+    },
+    {
+      "lesson": 6,
+      "action": "step2",
+      "seconds": 13.33,
+      "events": 80,
+      "speed": 6
+    },
+    {
+      "lesson": 7,
+      "action": "step0",
+      "seconds": 0.42,
+      "events": 4,
+      "speed": 10
+    },
+    {
+      "lesson": 7,
+      "action": "step1",
+      "seconds": 1.5,
+      "events": 15,
+      "speed": 10
+    },
+    {
+      "lesson": 7,
+      "action": "step2",
+      "seconds": 14.02,
+      "events": 140,
+      "speed": 10
+    },
+    {
+      "lesson": 8,
+      "action": "step0",
+      "seconds": 0.72,
+      "events": 7,
+      "speed": 10
+    },
+    {
+      "lesson": 8,
+      "action": "step1",
+      "seconds": 13.3,
+      "events": 133,
+      "speed": 10
+    },
+    {
+      "lesson": 8,
+      "action": "step2",
+      "seconds": 1.92,
+      "events": 19,
+      "speed": 10
+    },
+    {
+      "lesson": 9,
+      "action": "step0",
+      "seconds": 7.33,
+      "events": 22,
+      "speed": 3
+    },
+    {
+      "lesson": 9,
+      "action": "step1",
+      "seconds": 7.33,
+      "events": 22,
+      "speed": 3
+    },
+    {
+      "lesson": 9,
+      "action": "step2",
+      "seconds": 4.33,
+      "events": 13,
+      "speed": 3
+    },
+    {
+      "lesson": 10,
+      "action": "step0",
+      "seconds": 4.33,
+      "events": 13,
+      "speed": 3
+    },
+    {
+      "lesson": 10,
+      "action": "step1",
+      "seconds": 4.33,
+      "events": 13,
+      "speed": 3
+    },
+    {
+      "lesson": 10,
+      "action": "step2",
+      "seconds": 7.33,
+      "events": 22,
+      "speed": 3
+    },
+    {
+      "lesson": 11,
+      "action": "step0",
+      "seconds": 1.17,
+      "events": 7,
+      "speed": 6
+    },
+    {
+      "lesson": 11,
+      "action": "step1",
+      "seconds": 12.17,
+      "events": 73,
+      "speed": 6
+    },
+    {
+      "lesson": 11,
+      "action": "step2",
+      "seconds": 5.92,
+      "events": 71,
+      "speed": 12
+    },
+    {
+      "lesson": 12,
+      "action": "step0",
+      "seconds": 4.52,
+      "events": 9,
+      "speed": 2
+    },
+    {
+      "lesson": 12,
+      "action": "step1",
+      "seconds": 4.52,
+      "events": 9,
+      "speed": 2
+    },
+    {
+      "lesson": 12,
+      "action": "step2",
+      "seconds": 4.52,
+      "events": 9,
+      "speed": 2
+    },
+    {
+      "lesson": 13,
+      "action": "step0",
+      "seconds": 4.0,
+      "events": 4,
+      "speed": 1
+    },
+    {
+      "lesson": 13,
+      "action": "step1",
+      "seconds": 4.0,
+      "events": 4,
+      "speed": 1
+    },
+    {
+      "lesson": 13,
+      "action": "step2",
+      "seconds": 4.0,
+      "events": 4,
+      "speed": 1
+    },
+    {
+      "lesson": 14,
+      "action": "step0",
+      "seconds": 5.67,
+      "events": 17,
+      "speed": 3
+    },
+    {
+      "lesson": 14,
+      "action": "step1",
+      "seconds": 5.67,
+      "events": 17,
+      "speed": 3
+    },
+    {
+      "lesson": 14,
+      "action": "step2",
+      "seconds": 5.67,
+      "events": 17,
+      "speed": 3
+    },
+    {
+      "lesson": 15,
+      "action": "step0",
+      "seconds": 3.67,
+      "events": 11,
+      "speed": 3
+    },
+    {
+      "lesson": 15,
+      "action": "step1",
+      "seconds": 10.33,
+      "events": 31,
+      "speed": 3
+    },
+    {
+      "lesson": 15,
+      "action": "step2",
+      "seconds": 0.33,
+      "events": 1,
+      "speed": 3
+    },
+    {
+      "lesson": 16,
+      "action": "step0",
+      "seconds": 6.77,
+      "events": 27,
+      "speed": 4
+    },
+    {
+      "lesson": 16,
+      "action": "step1",
+      "seconds": 6.77,
+      "events": 27,
+      "speed": 4
+    },
+    {
+      "lesson": 16,
+      "action": "step2",
+      "seconds": 6.77,
+      "events": 27,
+      "speed": 4
+    },
+    {
+      "lesson": 17,
+      "action": "step0",
+      "seconds": 5.52,
+      "events": 11,
+      "speed": 2
+    },
+    {
+      "lesson": 17,
+      "action": "step1",
+      "seconds": 5.52,
+      "events": 11,
+      "speed": 2
+    },
+    {
+      "lesson": 17,
+      "action": "step2",
+      "seconds": 5.52,
+      "events": 11,
+      "speed": 2
+    },
+    {
+      "lesson": 18,
+      "action": "step0",
+      "seconds": 12.77,
+      "events": 51,
+      "speed": 4
+    },
+    {
+      "lesson": 18,
+      "action": "step1",
+      "seconds": 12.77,
+      "events": 51,
+      "speed": 4
+    },
+    {
+      "lesson": 18,
+      "action": "step2",
+      "seconds": 12.77,
+      "events": 51,
+      "speed": 4
+    },
+    {
+      "lesson": 19,
+      "action": "step0",
+      "seconds": 9.0,
+      "events": 9,
+      "speed": 1
+    },
+    {
+      "lesson": 19,
+      "action": "step1",
+      "seconds": 9.0,
+      "events": 9,
+      "speed": 1
+    },
+    {
+      "lesson": 19,
+      "action": "step2",
+      "seconds": 5.92,
+      "events": 71,
+      "speed": 12
+    }
+  ],
+  "first_lesson_animation_seconds": 9.76,
+  "first_lesson_end_work_seconds": 0.0126,
+  "usability": {
+    "tests_total": 52,
+    "maximum_lcs_chars": 12,
+    "maximum_items": 8,
+    "display_capacity_limit": 25,
+    "maximum_coin_amount": 150,
+    "table_scrolling": false,
+    "path_numbered_steps": false,
+    "about_modal": true,
+    "step_review": "Use bag input repeats the default input if no custom bag is shared; Reorder words intentionally preserves the singleton result.",
+    "human_desktop_test": false
+  },
+  "frame_work_80x60": {
+    "frames": 300,
+    "events_per_second": 240,
+    "events_at_end": 4001,
+    "expanded_at_end": 1970,
+    "mean_ms": 8.19,
+    "p95_ms": 8.442,
+    "max_ms": 9.124,
+    "driver": "dummy",
+    "includes": "tick + draw + display.flip; excludes sleep"
+  },
+  "end_80x60": {
+    "before": {
+      "python": "3.14.2",
+      "grid": [
+        80,
+        60
+      ],
+      "start": [
+        0,
+        30
+      ],
+      "goal": [
+        79,
+        30
+      ],
+      "algorithm": "Dijkstra",
+      "normal": {
+        "elapsed_seconds": 1.3706,
+        "tracemalloc_peak_bytes": null,
+        "process_peak_rss_bytes": 82608128,
+        "events": 7803,
+        "expanded": 3871,
+        "cost": 79
+      },
+      "traced": {
+        "elapsed_seconds": 5.751,
+        "tracemalloc_peak_bytes": 56186592,
+        "process_peak_rss_bytes": 139345920,
+        "events": 7803,
+        "expanded": 3871,
+        "cost": 79
+      },
+      "note": "RSS is process lifetime peak; tracemalloc includes retained history. Traced timing includes instrumentation overhead."
+    },
+    "initial_after": {
+      "python": "3.14.2",
+      "grid": [
+        80,
+        60
+      ],
+      "start": [
+        0,
+        30
+      ],
+      "goal": [
+        79,
+        30
+      ],
+      "algorithm": "Dijkstra",
+      "normal": {
+        "elapsed_seconds": 0.0786,
+        "tracemalloc_peak_bytes": null,
+        "process_peak_rss_bytes": 32800768,
+        "events": 7803,
+        "expanded": 3871,
+        "cost": 79
+      },
+      "traced": {
+        "elapsed_seconds": 0.4724,
+        "tracemalloc_peak_bytes": 10691616,
+        "process_peak_rss_bytes": 47661056,
+        "events": 7803,
+        "expanded": 3871,
+        "cost": 79
+      },
+      "note": "RSS is process lifetime peak; tracemalloc includes retained history. Traced timing includes instrumentation overhead."
+    },
+    "after": {
+      "python": "3.14.2",
+      "grid": [
+        80,
+        60
+      ],
+      "start": [
+        0,
+        30
+      ],
+      "goal": [
+        79,
+        30
+      ],
+      "algorithm": "Dijkstra",
+      "normal": {
+        "elapsed_seconds": 0.084,
+        "tracemalloc_peak_bytes": null,
+        "process_peak_rss_bytes": 33259520,
+        "events": 7803,
+        "expanded": 3871,
+        "cost": 79
+      },
+      "traced": {
+        "elapsed_seconds": 0.492,
+        "tracemalloc_peak_bytes": 10692216,
+        "process_peak_rss_bytes": 47775744,
+        "events": 7803,
+        "expanded": 3871,
+        "cost": 79
+      },
+      "note": "RSS is process lifetime peak; tracemalloc includes retained history. Traced timing includes instrumentation overhead."
+    }
+  },
+  "installation": {
+    "clean_pygame_verified": false,
+    "attempted_python": "3.12.13",
+    "reason": "PyPI DNS connection unavailable",
+    "used_for_ui": "Python 3.14.2 with locally patched pygame 2.6.1"
+  }
+}

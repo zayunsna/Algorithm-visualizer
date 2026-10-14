@@ -1,0 +1,246 @@
+{
+  "environment": {
+    "python": "3.14.2",
+    "pygame": "2.6.1",
+    "SDL": [
+      2,
+      32,
+      10
+    ],
+    "driver": "dummy",
+    "size": [
+      1280,
+      720
+    ]
+  },
+  "path": {
+    "02-bfs": {
+      "cost": 13,
+      "length": 13,
+      "expanded": 121,
+      "max_frontier": 13,
+      "relaxations": 129
+    },
+    "03-dfs": {
+      "cost": 25,
+      "length": 25,
+      "expanded": 133,
+      "max_frontier": 72,
+      "relaxations": 159
+    },
+    "04-bfs-swamp": {
+      "cost": 17,
+      "length": 13,
+      "expanded": 121,
+      "max_frontier": 13,
+      "relaxations": 129
+    },
+    "05-dijkstra": {
+      "cost": 15,
+      "length": 15,
+      "expanded": 139,
+      "max_frontier": 13,
+      "relaxations": 147
+    },
+    "06-astar": {
+      "cost": 15,
+      "length": 15,
+      "expanded": 42,
+      "max_frontier": 34,
+      "relaxations": 74
+    },
+    "07-astar-overestimate": {
+      "cost": 17,
+      "length": 13,
+      "expanded": 14,
+      "max_frontier": 28,
+      "relaxations": 40
+    }
+  },
+  "bits": {
+    "23-bits-logic": {
+      "width": 8,
+      "result": 24,
+      "iterations": 0,
+      "is_power": null,
+      "best": null,
+      "subsets": null
+    },
+    "24-bits-shift": {
+      "width": 8,
+      "result": 38,
+      "iterations": 2,
+      "is_power": null,
+      "best": null,
+      "subsets": null
+    },
+    "25-bits-negate": {
+      "width": 8,
+      "result": 251,
+      "iterations": 0,
+      "is_power": null,
+      "best": null,
+      "subsets": null
+    },
+    "26-bits-clear": {
+      "width": 8,
+      "result": 0,
+      "iterations": 3,
+      "is_power": null,
+      "best": null,
+      "subsets": null
+    },
+    "27-bits-isolate": {
+      "width": 8,
+      "result": 8,
+      "iterations": 0,
+      "is_power": null,
+      "best": null,
+      "subsets": null
+    },
+    "28-bits-power": {
+      "width": 8,
+      "result": 0,
+      "iterations": 1,
+      "is_power": true,
+      "best": null,
+      "subsets": null
+    },
+    "29-bits-unique": {
+      "width": 8,
+      "result": 7,
+      "iterations": 5,
+      "is_power": null,
+      "best": null,
+      "subsets": null
+    },
+    "30-bits-subset": {
+      "width": 8,
+      "result": 7,
+      "iterations": 0,
+      "is_power": null,
+      "best": 44,
+      "subsets": 8
+    }
+  },
+  "first_lesson_animation_seconds": 44.33,
+  "first_lesson_end_work_seconds": 0.0225,
+  "frame_work_80x60": {
+    "frames": 300,
+    "events_per_second": 240,
+    "events_at_end": 4001,
+    "expanded_at_end": 1970,
+    "mean_ms": 7.942,
+    "p95_ms": 8.219,
+    "max_ms": 9.155,
+    "driver": "dummy",
+    "includes": "tick + draw + display.flip; excludes sleep"
+  },
+  "end_80x60": {
+    "before": {
+      "python": "3.14.2",
+      "grid": [
+        80,
+        60
+      ],
+      "start": [
+        0,
+        30
+      ],
+      "goal": [
+        79,
+        30
+      ],
+      "algorithm": "Dijkstra",
+      "normal": {
+        "elapsed_seconds": 1.3706,
+        "tracemalloc_peak_bytes": null,
+        "process_peak_rss_bytes": 82608128,
+        "events": 7803,
+        "expanded": 3871,
+        "cost": 79
+      },
+      "traced": {
+        "elapsed_seconds": 5.751,
+        "tracemalloc_peak_bytes": 56186592,
+        "process_peak_rss_bytes": 139345920,
+        "events": 7803,
+        "expanded": 3871,
+        "cost": 79
+      },
+      "note": "RSS is process lifetime peak; tracemalloc includes retained history. Traced timing includes instrumentation overhead."
+    },
+    "initial_after": {
+      "python": "3.14.2",
+      "grid": [
+        80,
+        60
+      ],
+      "start": [
+        0,
+        30
+      ],
+      "goal": [
+        79,
+        30
+      ],
+      "algorithm": "Dijkstra",
+      "normal": {
+        "elapsed_seconds": 0.0786,
+        "tracemalloc_peak_bytes": null,
+        "process_peak_rss_bytes": 32800768,
+        "events": 7803,
+        "expanded": 3871,
+        "cost": 79
+      },
+      "traced": {
+        "elapsed_seconds": 0.4724,
+        "tracemalloc_peak_bytes": 10691616,
+        "process_peak_rss_bytes": 47661056,
+        "events": 7803,
+        "expanded": 3871,
+        "cost": 79
+      },
+      "note": "RSS is process lifetime peak; tracemalloc includes retained history. Traced timing includes instrumentation overhead."
+    },
+    "after": {
+      "python": "3.14.2",
+      "grid": [
+        80,
+        60
+      ],
+      "start": [
+        0,
+        30
+      ],
+      "goal": [
+        79,
+        30
+      ],
+      "algorithm": "Dijkstra",
+      "normal": {
+        "elapsed_seconds": 0.0801,
+        "tracemalloc_peak_bytes": null,
+        "process_peak_rss_bytes": 32899072,
+        "events": 7803,
+        "expanded": 3871,
+        "cost": 79
+      },
+      "traced": {
+        "elapsed_seconds": 0.4601,
+        "tracemalloc_peak_bytes": 10691616,
+        "process_peak_rss_bytes": 47595520,
+        "events": 7803,
+        "expanded": 3871,
+        "cost": 79
+      },
+      "note": "RSS is process lifetime peak; tracemalloc includes retained history. Traced timing includes instrumentation overhead."
+    }
+  },
+  "installation": {
+    "clean_pygame_verified": false,
+    "attempted_python": "3.12.13",
+    "reason": "PyPI DNS connection unavailable",
+    "used_for_ui": "Python 3.14.2 with locally patched pygame 2.6.1"
+  }
+}

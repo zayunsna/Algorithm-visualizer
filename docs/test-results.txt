@@ -1,0 +1,57 @@
+test_4_and_16bit_boundaries_and_outside_width (tests.test_bits.BitTests.test_4_and_16bit_boundaries_and_outside_width) ... ok
+test_all_65536_pairs_each_logic_generator (tests.test_bits.BitTests.test_all_65536_pairs_each_logic_generator) ... ok
+test_all_8bit_shifts_and_negation (tests.test_bits.BitTests.test_all_8bit_shifts_and_negation) ... ok
+test_all_8bit_tricks_and_counters (tests.test_bits.BitTests.test_all_8bit_tricks_and_counters) ... ok
+test_all_generators_reversible_and_rows_masked (tests.test_bits.BitTests.test_all_generators_reversible_and_rows_masked) ... ok
+test_invalid_parameters (tests.test_bits.BitTests.test_invalid_parameters) ... ok
+test_subsets_against_combinations_and_knapsack (tests.test_bits.BitTests.test_subsets_against_combinations_and_knapsack) ... ok
+test_xor_singleton_by_frequencies (tests.test_bits.BitTests.test_xor_singleton_by_frequencies) ... ok
+test_all_bit_steps_widths_and_sizes (tests.test_bits_ui.BitUITests.test_all_bit_steps_widths_and_sizes) ... ok
+test_group_menu_scroll_keyboard_resize_and_help (tests.test_bits_ui.BitUITests.test_group_menu_scroll_keyboard_resize_and_help) ... ok
+test_loading_closes_help_and_width_clamps_shift (tests.test_bits_ui.BitUITests.test_loading_closes_help_and_width_clamps_shift) ... ok
+test_negation_minimum_zero_and_xor_input (tests.test_bits_ui.BitUITests.test_negation_minimum_zero_and_xor_input) ... ok
+test_signed_view_preserves_history_and_hex_inputs (tests.test_bits_ui.BitUITests.test_signed_view_preserves_history_and_hex_inputs) ... ok
+test_subset_shares_custom_knapsack_input (tests.test_bits_ui.BitUITests.test_subset_shares_custom_knapsack_input) ... ok
+test_fibonacci_formula (tests.test_dp.DPTests.test_fibonacci_formula) ... ok
+test_invalid (tests.test_dp.DPTests.test_invalid) ... ok
+test_knapsack_250_bruteforce (tests.test_dp.DPTests.test_knapsack_250_bruteforce) ... ok
+test_lcs_250_bruteforce (tests.test_dp.DPTests.test_lcs_250_bruteforce) ... ok
+test_activity_counterexamples (tests.test_greedy.GreedyTests.test_activity_counterexamples) ... ok
+test_bag_vertices_and_enumeration (tests.test_greedy.GreedyTests.test_bag_vertices_and_enumeration) ... ok
+test_coin_counterexample_and_canonical (tests.test_greedy.GreedyTests.test_coin_counterexample_and_canonical) ... ok
+test_empty_unreachable_and_invalid (tests.test_greedy.GreedyTests.test_empty_unreachable_and_invalid) ... ok
+test_random_activity (tests.test_greedy.GreedyTests.test_random_activity) ... ok
+test_random_coins (tests.test_greedy.GreedyTests.test_random_coins) ... ok
+test_400_random_grids (tests.test_path.PathTests.test_400_random_grids) ... ok
+test_boundaries (tests.test_path.PathTests.test_boundaries) ... ok
+test_frontier_deltas_match_prechange_snapshots (tests.test_path.PathTests.test_frontier_deltas_match_prechange_snapshots) ... ok
+test_invalid (tests.test_path.PathTests.test_invalid) ... ok
+test_reversible_and_deterministic (tests.test_path.PathTests.test_reversible_and_deterministic) ... ok
+test_algorithm_modules_do_not_import_pygame (tests.test_ui.UITests.test_algorithm_modules_do_not_import_pygame) ... ok
+test_all_modules_backward_forward (tests.test_ui.UITests.test_all_modules_backward_forward) ... ok
+test_dp_greedy_share_custom_input (tests.test_ui.UITests.test_dp_greedy_share_custom_input) ... ok
+test_dropdown_modal_gaps_and_keyboard (tests.test_ui.UITests.test_dropdown_modal_gaps_and_keyboard) ... ok
+test_dropdown_scroll_enter_tab_and_resized_clicks (tests.test_ui.UITests.test_dropdown_scroll_enter_tab_and_resized_clicks) ... ok
+test_end_button_key_and_undo (tests.test_ui.UITests.test_end_button_key_and_undo) ... ok
+test_every_lesson_and_step_at_both_sizes (tests.test_ui.UITests.test_every_lesson_and_step_at_both_sizes) ... ok
+test_grid_paint_drag_start_goal_maze_clear (tests.test_ui.UITests.test_grid_paint_drag_start_goal_maze_clear) ... ok
+test_hover_astar_values_and_no_path (tests.test_ui.UITests.test_hover_astar_values_and_no_path) ... ok
+test_input_edit_errors_and_apply_button (tests.test_ui.UITests.test_input_edit_errors_and_apply_button) ... ok
+test_module_legends_and_coin_dependencies (tests.test_ui.UITests.test_module_legends_and_coin_dependencies) ... ok
+test_panel_scroll_without_table_pan (tests.test_ui.UITests.test_panel_scroll_without_table_pan) ... ok
+test_quit_and_minimum_window_size (tests.test_ui.UITests.test_quit_and_minimum_window_size) ... ok
+test_stage_boundaries_and_path_counterexamples (tests.test_ui.UITests.test_stage_boundaries_and_path_counterexamples) ... ok
+test_ui_keys_preserve_history (tests.test_ui.UITests.test_ui_keys_preserve_history) ... ok
+test_fixed_maps_claims_and_repeatability (tests.test_usability.SearchUsabilityTests.test_fixed_maps_claims_and_repeatability) ... ok
+test_stop_on_discovery_and_not_priority_insertion (tests.test_usability.SearchUsabilityTests.test_stop_on_discovery_and_not_priority_insertion) ... ok
+test_zero_popcount_recorded (tests.test_usability.SearchUsabilityTests.test_zero_popcount_recorded) ... ok
+test_about_modal_all_lessons_and_tooltips (tests.test_usability.UsabilityUITests.test_about_modal_all_lessons_and_tooltips) ... ok
+test_maximum_tables_and_dependencies_inside_main (tests.test_usability.UsabilityUITests.test_maximum_tables_and_dependencies_inside_main) ... ok
+test_path_buttons_and_comparison_history (tests.test_usability.UsabilityUITests.test_path_buttons_and_comparison_history) ... ok
+test_shift_interpretations_and_untruncated_result (tests.test_usability.UsabilityUITests.test_shift_interpretations_and_untruncated_result) ... ok
+test_speed_presets_memory_reset_and_clamps (tests.test_usability.UsabilityUITests.test_speed_presets_memory_reset_and_clamps) ... ok
+
+----------------------------------------------------------------------
+Ran 52 tests in 37.483s
+
+OK

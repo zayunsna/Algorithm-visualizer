@@ -1,0 +1,33 @@
+{
+  "python": "3.14.2",
+  "grid": [
+    80,
+    60
+  ],
+  "start": [
+    0,
+    30
+  ],
+  "goal": [
+    79,
+    30
+  ],
+  "algorithm": "Dijkstra",
+  "normal": {
+    "elapsed_seconds": 0.084,
+    "tracemalloc_peak_bytes": null,
+    "process_peak_rss_bytes": 33259520,
+    "events": 7803,
+    "expanded": 3871,
+    "cost": 79
+  },
+  "traced": {
+    "elapsed_seconds": 0.492,
+    "tracemalloc_peak_bytes": 10692216,
+    "process_peak_rss_bytes": 47775744,
+    "events": 7803,
+    "expanded": 3871,
+    "cost": 79
+  },
+  "note": "RSS is process lifetime peak; tracemalloc includes retained history. Traced timing includes instrumentation overhead."
+}

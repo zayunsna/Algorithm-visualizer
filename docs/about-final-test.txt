@@ -1,0 +1,8 @@
+test_about_modal_all_lessons_and_tooltips (tests.test_usability.UsabilityUITests.test_about_modal_all_lessons_and_tooltips) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 3.244s
+
+OK
+pygame 2.6.1 (SDL 2.32.10, Python 3.14.2)
+Hello from the pygame community. https://www.pygame.org/contribute.html
