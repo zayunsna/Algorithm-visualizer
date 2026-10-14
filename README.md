@@ -253,3 +253,7 @@ waiting time and does not guarantee real GPU performance or 60 fps across the wh
 - The history uses memory in proportion to the number of events; algorithm complexity figures do not include recording or drawing.
 - Playing the largest inputs takes longer than the small default lessons. Use End to see the result, or change the speed.
 - Long right-panel listings scroll, and long field previews are shortened. Bit results are split into decimal and hexadecimal lines.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
